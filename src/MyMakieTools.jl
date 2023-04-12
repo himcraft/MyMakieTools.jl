@@ -1,6 +1,7 @@
 module MyMakieTools
-
 using Makie
+export IntegerTicks
+export mytheme, savefig, get_tickvalues
 struct IntegerTicks end
 Makie.get_tickvalues(::IntegerTicks, vmin, vmax) = ceil(Int, vmin) : floor(Int, vmax)
 #====
@@ -51,12 +52,12 @@ function mytheme()
     return myTheme
 end
 
-function savefig(f::Figure,name,savepdf=false,savepng=false)
-	if(savepdf)
-	save(name*".pdf",f,pt_per_unit=10)
+function savefig(name::String,f::Figure;pdf=false,png=false,prefix="")
+	if(pdf)
+	save(prefix*name*".pdf",f,pt_per_unit=10)
 	end
-	if(savepng)
-	save(name*".png",f,px_per_unit=10)
+	if(png)
+	save(prefix*name*".png",f,px_per_unit=10)
 	end
 	display(f)
 end
