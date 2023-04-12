@@ -1,4 +1,4 @@
-module Makietheme
+module MyMakieTools
 
 using MakieCore
 struct IntegerTicks end
