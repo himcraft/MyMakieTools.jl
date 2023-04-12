@@ -1,7 +1,7 @@
 module MyMakieTools
 using Makie
 export IntegerTicks
-export mytheme, savefig, get_tickvalues
+export mytheme, savefig, get_tickvalues, logaxis
 struct IntegerTicks end
 Makie.get_tickvalues(::IntegerTicks, vmin, vmax) = ceil(Int, vmin) : floor(Int, vmax)
 #====
@@ -60,5 +60,20 @@ function savefig(name::String,f::Figure;pdf=false,png=false,prefix="")
 	save(prefix*name*".png",f,px_per_unit=10)
 	end
 	display(f)
+end
+
+function logaxis(f::Figure,x::Bool=true,y::Bool=true;axpos=[1,1],title::AbstractString="",xlabel::AbstractString="",ylabel::AbstractString="",aspectratio=4/3)::Axis
+    xscl=x ? log10 : identity
+    yscl=y ? log10 : identity
+    ax=Axis(f[axpos[1],axpos[2]],xscale=xscl,yscale=yscl,title=title,xlabel=xlabel,ylabel=ylabel,aspect=aspectratio)
+    if(x)
+        ax.xminorticks=IntervalsBetween(9)
+        ax.xticks=LogTicks(IntegerTicks())
+    end
+    if(y)
+        ax.yminorticks=IntervalsBetween(9)
+        ax.yticks=LogTicks(IntegerTicks())
+    end
+    return ax
 end
 end # module MyMakieTools
