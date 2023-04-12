@@ -60,3 +60,4 @@ function savefig(f:Figure,name,savepdf=false,savepng=false)
 	end
 	display(f)
 end
+end # module MyMakieTools
