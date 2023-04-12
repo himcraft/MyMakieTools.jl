@@ -50,3 +50,13 @@ function mytheme()
     )
     return myTheme
 end
+
+function savefig(f:Figure,name,savepdf=false,savepng=false)
+	if(savepdf)
+	save(name*".pdf",f,pt_per_unit=10)
+	end
+	if(savepng)
+	save(name*".png",f,px_per_unit=10)
+	end
+	display(f)
+end
