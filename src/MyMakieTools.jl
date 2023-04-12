@@ -1,6 +1,6 @@
 module MyMakieTools
 
-using MakieCore
+using Makie
 struct IntegerTicks end
 Makie.get_tickvalues(::IntegerTicks, vmin, vmax) = ceil(Int, vmin) : floor(Int, vmax)
 #====
@@ -51,7 +51,7 @@ function mytheme()
     return myTheme
 end
 
-function savefig(f:Figure,name,savepdf=false,savepng=false)
+function savefig(f::Figure,name,savepdf=false,savepng=false)
 	if(savepdf)
 	save(name*".pdf",f,pt_per_unit=10)
 	end
