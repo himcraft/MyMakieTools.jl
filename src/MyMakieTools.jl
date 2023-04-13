@@ -11,6 +11,14 @@ https://web.archive.org/web/20220705185841/https://s-rip.github.io/report/colour
 sripcolor=["#e21f26","#e4789b","#295f8a","#5f98c6","#afcbe3","#723b7a","#ad71b5","#d6b8da","#f57e20","#fdbf6e","#ec008c","#f799D1","#00aeef","#60c8e8","#34a048","#b35b28","#ffd700"]
 pltcolor=sripcolor #TODO: will be removed later
 
+"""
+    mytheme()
+
+Return a modified Makie.Theme. 
+
+# Usage
+    set_theme!(mytheme())
+"""
 function mytheme()
     myTheme=Theme(
         palette=(
@@ -52,6 +60,11 @@ function mytheme()
     return myTheme
 end
 
+"""
+    savefig(name::String,f::Figure;pdf=false,png=false,prefix="")
+
+Display and save Makie.Figure as pdf and/or png.
+"""
 function savefig(name::String,f::Figure;pdf=false,png=false,prefix="")
 	if(pdf)
 	save(prefix*name*".pdf",f,pt_per_unit=10)
@@ -62,6 +75,11 @@ function savefig(name::String,f::Figure;pdf=false,png=false,prefix="")
 	display(f)
 end
 
+"""
+    logaxis(f::Figure,x::Bool=true,y::Bool=true;axpos=[1,1],title::AbstractString="",xlabel::AbstractString="",ylabel::AbstractString="",aspectratio=4/3)
+
+Return a Makie.Axis with x and/or y scales as log10.
+"""
 function logaxis(f::Figure,x::Bool=true,y::Bool=true;axpos=[1,1],title::AbstractString="",xlabel::AbstractString="",ylabel::AbstractString="",aspectratio=4/3)::Axis
     xscl=x ? log10 : identity
     yscl=y ? log10 : identity
