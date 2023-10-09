@@ -55,8 +55,8 @@ function mytheme()
             linestyle=:dash,
         ),
         fontsize=25,
-        fonts=(;regular="Times New Roman",bold="Times New Roman Bold",italic="Times New Roman Italic"),
     )
+    myTheme=merge(myTheme,theme_latexfonts())
     return myTheme
 end
 
