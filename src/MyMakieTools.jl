@@ -1,5 +1,6 @@
 module MyMakieTools
 using Makie
+# using ColorSchemes
 export IntegerTicks
 export mytheme, savefig, get_tickvalues, logaxis
 struct IntegerTicks end
@@ -12,18 +13,36 @@ sripcolor=["#e21f26","#e4789b","#295f8a","#5f98c6","#afcbe3","#723b7a","#ad71b5"
 pltcolor=sripcolor #TODO: will be removed later
 
 """
-    mytheme()
+    mytheme([colorusage])
 
 Return a modified Makie.Theme. 
+
+`colorusage`: choose different palette according to the features of the data.
+- :categorical[default] => glasbey_category10_n256
+- :doublet => tab20
+- :diverging => roma10
+- :cyclic => romaO10
+
+For more palettes, see https://juliagraphics.github.io/ColorSchemes.jl/stable/catalogue/
 
 # Usage
     set_theme!(mytheme())
 """
-function mytheme()
+function mytheme(colorusage=:categorical)
+    if colorusage==:categorical
+        COLORSCHEME=Makie.ColorSchemes.glasbey_category10_n256.colors
+    elseif colorusage==:doublet
+        COLORSCHEME=Makie.ColorSchemes.tab20.colors
+    elseif colorusage==:diverging
+        COLORSCHEME=Makie.ColorSchemes.roma10.colors
+    elseif colorusage==:cyclic
+        COLORSCHEME=Makie.ColorSchemes.romaO10.colors
+    else
+        COLORSCHEME=Makie.colorschemes[colorusage].colors
+    end
     myTheme=Theme(
         palette=(
-            color=pltcolor,
-            # color=cgrad(ColorSchemes.tab10.colors,10,categorical=true)
+            color=COLORSCHEME,
         ),
         Axis=(
             xgridvisible=false,
