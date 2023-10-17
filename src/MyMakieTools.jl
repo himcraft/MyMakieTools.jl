@@ -1,16 +1,12 @@
 module MyMakieTools
 using Makie
-# using ColorSchemes
 export IntegerTicks
 export mytheme, savefig, get_tickvalues, logaxis
 struct IntegerTicks end
 Makie.get_tickvalues(::IntegerTicks, vmin, vmax) = ceil(Int, vmin) : floor(Int, vmax)
 #====
 https://web.archive.org/web/20220705182930/https://s-rip.github.io/report/colourdefinition.html
-https://web.archive.org/web/20220705185841/https://s-rip.github.io/report/colourtables.html
 ====#
-sripcolor=["#e21f26","#e4789b","#295f8a","#5f98c6","#afcbe3","#723b7a","#ad71b5","#d6b8da","#f57e20","#fdbf6e","#ec008c","#f799D1","#00aeef","#60c8e8","#34a048","#b35b28","#ffd700"]
-pltcolor=sripcolor #TODO: will be removed later
 
 """
     mytheme([colorusage])
@@ -22,6 +18,7 @@ Return a modified Makie.Theme.
 - :doublet => tab20
 - :diverging => roma10
 - :cyclic => romaO10
+- :srip => [srip project](https://web.archive.org/web/20220705185841/https://s-rip.github.io/report/colourtables.html)
 
 For more palettes, see https://juliagraphics.github.io/ColorSchemes.jl/stable/catalogue/
 
@@ -37,6 +34,8 @@ function mytheme(colorusage=:categorical)
         COLORSCHEME=Makie.ColorSchemes.roma10.colors
     elseif colorusage==:cyclic
         COLORSCHEME=Makie.ColorSchemes.romaO10.colors
+    elseif colorusage==:srip
+        COLORSCHEME=["#e21f26","#e4789b","#295f8a","#5f98c6","#afcbe3","#723b7a","#ad71b5","#d6b8da","#f57e20","#fdbf6e","#ec008c","#f799D1","#00aeef","#60c8e8","#34a048","#b35b28","#ffd700"]
     else
         COLORSCHEME=Makie.colorschemes[colorusage].colors
     end
