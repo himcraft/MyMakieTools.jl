@@ -83,12 +83,12 @@ end
 
 Display and save Makie.Figure as pdf and/or png.
 """
-function savefig(name::String,f::Figure;pdf=false,png=false,prefix="")
+function savefig(name::String,f::Figure;pdf=false,png=false,prefix="",res=10)
 	if(pdf)
-	save(prefix*name*".pdf",f,pt_per_unit=10)
+	save(prefix*name*".pdf",f,pt_per_unit=res)
 	end
 	if(png)
-	save(prefix*name*".png",f,px_per_unit=10)
+	save(prefix*name*".png",f,px_per_unit=res)
 	end
 	display(f)
 end
