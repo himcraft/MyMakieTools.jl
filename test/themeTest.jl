@@ -6,7 +6,6 @@ function themeTest(giventitle,N)
         lines!(ax,x,0.1*(i-1)*sin.(x)+0.1*(9-i)*cos.(x),label="$i")
     end
     Legend(f[1,2],ax,nbanks=1)
-    display(f)
     return f
 end
 
