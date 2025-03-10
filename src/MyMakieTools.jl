@@ -115,4 +115,14 @@ function logaxis(f::Figure,x::Bool=true,y::Bool=true;axpos=[1,1],title::Abstract
     end
     return ax
 end
+
+"""
+    get_palette_colors()
+
+Return the current palette colors in an array.
+"""
+function get_palette_colors()
+    return Makie.current_default_theme().palette.color.val
+end
+
 end # module MyMakieTools
