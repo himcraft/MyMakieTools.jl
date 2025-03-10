@@ -97,14 +97,14 @@ function savefig(name::String,f::Figure;pdf=false,png=false,prefix="",res=1,dpi=
 end
 
 """
-    logaxis(f::Figure,x::Bool=true,y::Bool=true;axpos=[1,1],title::AbstractString="",xlabel::AbstractString="",ylabel::AbstractString="",aspectratio=4/3)
+    logaxis(f::Figure,x::Bool=true,y::Bool=true;axpos=[1,1],title::AbstractString="",xlabel::AbstractString="",ylabel::AbstractString="")
 
 Return a Makie.Axis with x and/or y scales as log10.
 """
-function logaxis(f::Figure,x::Bool=true,y::Bool=true;axpos=[1,1],title::AbstractString="",xlabel::AbstractString="",ylabel::AbstractString="",aspectratio=4/3)::Axis
+function logaxis(f::Figure,x::Bool=true,y::Bool=true;axpos=[1,1],title::AbstractString="",xlabel::AbstractString="",ylabel::AbstractString="")::Axis
     xscl=x ? log10 : identity
     yscl=y ? log10 : identity
-    ax=Axis(f[axpos[1],axpos[2]],xscale=xscl,yscale=yscl,title=title,xlabel=xlabel,ylabel=ylabel,aspect=aspectratio)
+    ax=Axis(f[axpos[1],axpos[2]],xscale=xscl,yscale=yscl,title=title,xlabel=xlabel,ylabel=ylabel)
     if(x)
         ax.xminorticks=IntervalsBetween(9)
         ax.xticks=LogTicks(IntegerTicks())
