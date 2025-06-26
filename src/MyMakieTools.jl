@@ -2,6 +2,7 @@ module MyMakieTools
 using Makie
 export IntegerTicks
 export mytheme, savefig, get_tickvalues, logaxis
+export get_palette_colors, dualAxis
 struct IntegerTicks end
 Makie.get_tickvalues(::IntegerTicks, vmin, vmax) = ceil(Int, vmin) : floor(Int, vmax)
 #====
@@ -84,7 +85,7 @@ end
 """
     savefig(name::String,f::Figure;pdf=false,png=false,prefix="",res=1,dpi=600)
 
-Display and save Makie.Figure as pdf and/or png.
+Display and save Makie.Figure as pdf and/or png and/or svg.
 """
 function savefig(name::String,f::Figure;pdf=false,png=false,svg=false,prefix="",res=1,dpi=600)
 	if(pdf)
@@ -126,6 +127,24 @@ Return the current palette colors in an array.
 """
 function get_palette_colors()
     return Makie.current_default_theme().palette.color.val
+end
+
+"""
+    dualAxis(f::Figure,axpos=[1,1];)
+
+Return two Makie.Axes in the same position, one for left y-axis and one for right y-axis.
+"""
+function dualAxis(f::Figure,axpos=[1,1];ax2color=:red)
+    ax1=Axis(f[axpos[1],axpos[2]])
+    ax2=Axis(f[axpos[1],axpos[2]], yaxisposition = :right,
+        yticklabelcolor = ax2color, 
+        ylabelcolor = ax2color, 
+        rightspinecolor = ax2color,
+        ytickcolor = ax2color,
+        yminortickcolor = ax2color,
+    )
+    hidexdecorations!(ax2)
+    return (ax1, ax2)
 end
 
 end # module MyMakieTools
