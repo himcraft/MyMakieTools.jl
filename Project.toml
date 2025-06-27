@@ -1,7 +1,7 @@
 name = "MyMakieTools"
 uuid = "3ed332e8-1ffe-4483-b29e-a80128025a50"
 authors = ["himcraft <1014harry@gmail.com>"]
-version = "0.3.1"
+version = "0.3.2"
 
 [deps]
 Makie = "ee78f7c6-11fb-53f2-987a-cfe4a2b5a57a"

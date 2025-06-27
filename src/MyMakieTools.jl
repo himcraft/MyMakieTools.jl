@@ -2,7 +2,7 @@ module MyMakieTools
 using Makie
 export IntegerTicks
 export mytheme, savefig, get_tickvalues, logaxis
-export get_palette_colors, dualAxis
+export get_palette_colors, dualAxis, syncDualAxes!
 struct IntegerTicks end
 Makie.get_tickvalues(::IntegerTicks, vmin, vmax) = ceil(Int, vmin) : floor(Int, vmax)
 #====
@@ -153,7 +153,9 @@ end
 Synchronize the x-axis of two Makie.Axes.
 """
 function syncDualAxes!(ax1, ax2)
-    xlims!(ax2, ax1.limits.val[1])
+    if !isnothing(ax1.limits.val[1])
+        xlims!(ax2, ax1.limits.val[1])
+    end
     ax2.xscale = ax1.xscale.val
 end
 
