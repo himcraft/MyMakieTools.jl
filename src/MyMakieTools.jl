@@ -147,4 +147,14 @@ function dualAxis(f::Figure,axpos=[1,1];ax2color=:red)
     return (ax1, ax2)
 end
 
+"""
+    syncDualAxes!(ax1, ax2)
+    
+Synchronize the x-axis of two Makie.Axes.
+"""
+function syncDualAxes!(ax1, ax2)
+    xlims!(ax2, ax1.limits.val[1])
+    ax2.xscale = ax1.xscale.val
+end
+
 end # module MyMakieTools
