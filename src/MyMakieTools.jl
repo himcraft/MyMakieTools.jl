@@ -130,16 +130,6 @@ function get_palette_colors()
 end
 
 """
-    dualAxis(f::Figure,axpos=[1,1];)
-
-Return two Makie.Axes in the same position, one for left y-axis and one for right y-axis.
-"""
-function dualAxis(f::Figure,axpos=[1,1];ax2color=:red)
-    f_layout = f[axpos[1],axpos[2]]
-    return dualAxis(f_layout;ax2color=ax2color)
-end
-
-"""
 dualAxis(f::GridPosition;)
 
 Return two Makie.Axes in the same position, one for left y-axis and one for right y-axis.
