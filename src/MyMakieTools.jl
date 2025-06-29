@@ -135,16 +135,36 @@ end
 Return two Makie.Axes in the same position, one for left y-axis and one for right y-axis.
 """
 function dualAxis(f::Figure,axpos=[1,1];ax2color=:red)
-    ax1=Axis(f[axpos[1],axpos[2]])
-    ax2=Axis(f[axpos[1],axpos[2]], yaxisposition = :right,
-        yticklabelcolor = ax2color, 
-        ylabelcolor = ax2color, 
-        rightspinecolor = ax2color,
-        ytickcolor = ax2color,
-        yminortickcolor = ax2color,
+    f_layout = f[axpos[1],axpos[2]]
+    return dualAxis(f_layout;ax2color=ax2color)
+end
+
+"""
+dualAxis(f::GridPosition;)
+
+Return two Makie.Axes in the same position, one for left y-axis and one for right y-axis.
+"""
+function dualAxis(f::GridPosition;ax2color=:red)
+    ax1=Axis(f[1,1])
+    ax2=Axis(f[1,1], yaxisposition = :right,
+    yticklabelcolor = ax2color, 
+    ylabelcolor = ax2color, 
+    rightspinecolor = ax2color,
+    ytickcolor = ax2color,
+    yminortickcolor = ax2color,
     )
     hidexdecorations!(ax2)
     return (ax1, ax2)
+end
+
+"""
+    dualAxis(f::Figure,axpos=[1,1];)
+
+Return two Makie.Axes in the same position, one for left y-axis and one for right y-axis.
+"""
+function dualAxis(f::Figure,axpos=[1,1];ax2color=:red)
+    f_layout = f[axpos[1],axpos[2]]
+    return dualAxis(f_layout;ax2color=ax2color)
 end
 
 """
