@@ -136,6 +136,7 @@ Return two Makie.Axes in the same position, one for left y-axis and one for righ
 """
 function dualAxis(f::GridPosition;ax2color=:red)
     ax1=Axis(f[1,1])
+    ax1.rightspinecolor = :transparent
     ax2=Axis(f[1,1], yaxisposition = :right,
     yticklabelcolor = ax2color, 
     ylabelcolor = ax2color, 
