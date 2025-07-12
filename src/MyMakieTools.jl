@@ -121,12 +121,26 @@ function logaxis(f::Figure,x::Bool=true,y::Bool=true;axpos=[1,1],title::Abstract
 end
 
 """
-    get_palette_colors()
+    get_palette_colors([show::Bool=false])
 
-Return the current palette colors in an array.
+Return the current Makie color palette as an array. 
+
+When `show` is `true`, returns colors as `RGB{Float64}` objects. 
+When `false` (default), returns the raw color values from the theme.
 """
 function get_palette_colors()
-    return Makie.current_default_theme().palette.color.val
+    theme = Makie.current_default_theme()
+    return theme.palette.color.val
+    # return Makie.current_default_theme().palette.color.val
+end
+
+function get_palette_colors(show::Bool)
+    colorstr=get_palette_colors()
+    if show
+        return [Makie.Colors.RGB{Float64}(parse(Makie.Colors.RGB, c)) for c in colorstr]
+    else
+        return colorstr
+    end
 end
 
 """
