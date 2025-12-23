@@ -121,6 +121,26 @@ function logaxis(f::Figure,x::Bool=true,y::Bool=true;axpos=[1,1],title::Abstract
 end
 
 """
+    logaxis(f::GridPosition,x::Bool=true,y::Bool=true;title::AbstractString="",xlabel::AbstractString="",ylabel::AbstractString="")
+
+Return a Makie.Axis with x and/or y scales as log10.
+"""
+function logaxis(f::GridPosition,x::Bool=true,y::Bool=true;title::AbstractString="",xlabel::AbstractString="",ylabel::AbstractString="")::Axis
+    xscl=x ? log10 : identity
+    yscl=y ? log10 : identity
+    ax=Axis(f,xscale=xscl,yscale=yscl,title=title,xlabel=xlabel,ylabel=ylabel)
+    if(x)
+        ax.xminorticks=IntervalsBetween(9)
+        ax.xticks=LogTicks(IntegerTicks())
+    end
+    if(y)
+        ax.yminorticks=IntervalsBetween(9)
+        ax.yticks=LogTicks(IntegerTicks())
+    end
+    return ax
+end
+
+"""
     get_palette_colors([show::Bool=false])
 
 Return the current Makie color palette as an array. 
