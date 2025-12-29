@@ -2,7 +2,7 @@ module MyMakieTools
 using Makie
 export IntegerTicks
 export mytheme, savefig, get_tickvalues, logaxis
-export get_palette_colors, dualAxis, syncDualAxes!
+export get_palette_colors, dualAxis, syncDualAxes!, makeAxisDual!
 struct IntegerTicks end
 Makie.get_tickvalues(::IntegerTicks, vmin, vmax) = ceil(Int, vmin) : floor(Int, vmax)
 #====
@@ -202,6 +202,21 @@ function syncDualAxes!(ax1, ax2)
         xlims!(ax2, ax1.limits.val[1])
     end
     ax2.xscale = ax1.xscale.val
+end
+
+"""
+    makeAxisDual!(ax; axcolor=:red)
+
+Convert a Makie.Axis into a dual-axis by moveing the y-axis to the right and change its color.
+"""
+function makeAxisDual!(ax; axcolor=:red)
+    ax.yaxisposition = :right
+    ax.yticklabelcolor = axcolor
+    ax.ylabelcolor = axcolor
+    ax.rightspinecolor = axcolor
+    ax.ytickcolor = axcolor
+    ax.yminortickcolor = axcolor
+    hidexdecorations!(ax)
 end
 
 end # module MyMakieTools
