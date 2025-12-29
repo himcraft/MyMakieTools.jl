@@ -3,6 +3,7 @@ using Makie
 export IntegerTicks
 export mytheme, savefig, get_tickvalues, logaxis
 export get_palette_colors, dualAxis, syncDualAxes!, makeAxisDual!
+export figureWrapper
 struct IntegerTicks end
 Makie.get_tickvalues(::IntegerTicks, vmin, vmax) = ceil(Int, vmin) : floor(Int, vmax)
 #====
@@ -225,6 +226,24 @@ function makeAxisDual!(ax; axcolor=:red)
     ax.ytickcolor = axcolor
     ax.yminortickcolor = axcolor
     hidexdecorations!(ax)
+end
+
+
+"""
+    figureWrapper(f::Union{Figure,GridPosition}, figname::String; auxname::String="", png::Bool=false, pdf::Bool=false, svg::Bool=false)
+
+Return a function to save the given figure or gridposition with specified name and options.
+"""
+function figureWrapper(f::Union{Figure,GridPosition}, figname::String; auxname::String="", png::Bool=false, pdf::Bool=false, svg::Bool=false)
+    figname = auxname == "" ? figname : figname * "_" * auxname
+    if f isa Figure
+        resize_to_layout!(f)
+        savefig(figname,f,png=png,pdf=pdf,svg=svg)
+        savefunc = (; kwargs...) -> savefig(figname,f; kwargs...)
+    else
+        savefunc = (; kwargs...) -> savefig(figname,f.layout.parent; kwargs...)
+    end
+    return savefunc
 end
 
 end # module MyMakieTools
