@@ -40,7 +40,7 @@ function mytheme(colorusage=:categorical)
     elseif colorusage==:srip
         COLORSCHEME=["#e21f26","#e4789b","#295f8a","#5f98c6","#afcbe3","#723b7a","#ad71b5","#d6b8da","#f57e20","#fdbf6e","#ec008c","#f799D1","#00aeef","#60c8e8","#34a048","#b35b28","#ffd700"]
     elseif colorusage==:comb
-        COLORSCHEME=["#000000","#ff0000","#0000ff","#2ca02c","#ff7f0e","#cc87a4"]
+        COLORSCHEME=["#000000", "#ff0000", "#0000ff", "#2ca02c", "#ff7f0e", "#cc87a4","#17becf","#9A6324","#bcbd22","#911eb4","#922728"]
     else
         COLORSCHEME=Makie.colorschemes[colorusage].colors
     end
